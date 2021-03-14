@@ -1,5 +1,5 @@
 # GIS
-Past GIS Coursework
+Past GIS Coursework. Thank for the guidance of [Prof. James Frew](https://bren.ucsb.edu/people/james-frew) from UCSB.
 
 [Global Population Density](https://github.com/LilianYou/GIS/blob/main/HW1LilyCheng.png) <br>
 [Sea Level Rise in Santa Barbara](https://github.com/LilianYou/GIS/blob/main/HW2LilyCheng.png) <br>
