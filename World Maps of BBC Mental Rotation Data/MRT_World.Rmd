@@ -1,0 +1,52 @@
+---
+title: "MRT_World"
+author: "Lily Cheng"
+date: "2/20/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(foreign)
+library(dplyr)
+library(readr)
+library(psych)
+library(ggplot2)
+library(lsmeans)
+library(afex)
+library(tibble)
+```
+
+```{r}
+Lippa <- read.spss("MRT_Line_Angle.sav", to.data.frame=TRUE)
+View(Lippa)
+str(Lippa)
+summary(Lippa)
+```
+
+Step1. Data cleaning and save the data as .csv file
+```{r}
+Lippa_new0 <- Lippa %>%
+  rename(FLine = line_f_m,
+         MLine = line_m_m,
+         FMRT = mrot_f_m,
+         MMRT = mrot_m_m) %>% 
+  mutate(avgLine = ((FLine*line_f_n + MLine*line_m_n)/(FLine + MLine)),
+         difLine = MLine - FLine,
+         avgMRT = ((FMRT*mrot_f_n + MMRT*mrot_m_n)/(mrot_f_n + mrot_m_n)),
+         difMRT = MMRT - FMRT)
+
+
+Lippa_new <- Lippa_new0 %>% 
+  select(country, FLine, MLine, avgLine, difLine, FMRT, MMRT, avgMRT, difMRT) 
+
+Lippa_new <-  Lippa_new[, c("country", "FLine", "MLine","avgLine", "difLine", "FMRT", "MMRT", "avgMRT", "difMRT")] 
+```
+
+```{r}
+write.csv(Lippa_new, "raw_data_cleaned.csv")
+```
+
